@@ -1,0 +1,36 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "body-parser": "^1.20.0",
+    "chokidar": "^3.5.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-jwt": "^5.3.1",
+    "express-validator": "^6.14.2",
+    "formidable": "^2.0.1",
+    "fs": "0.0.1-security",
+    "google-auth-library": "^8.7.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.5.1",
+    "morgan": "^1.10.0",
+    "sendgrid": "^5.2.3",
+    "shortid": "^2.2.16",
+    "sib-api-v3-sdk": "^8.5.0",
+    "slugify": "^1.6.5",
+    "string-strip-html": "^11.1.0"
+  }
+}
