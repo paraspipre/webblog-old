@@ -3,8 +3,6 @@ import { signup,isAuth,preSignup } from "../../actions/auth";
 import Router from "next/router";
 import Link from "next/link"
 import LoginGoogle from './LoginGoogle';
-import GoogleLoginButton from "./GoogleLoginButton";
-
 const SignupComponent = () => {
 	const [values, setValues] = useState({
 		name: "",
@@ -87,7 +85,6 @@ const SignupComponent = () => {
 		{showLoading()}
 		{showMessage()}
 		<LoginGoogle />
-		<GoogleLoginButton/>
 		{showForm && signupForm()}
 		<br />
 		<Link legacyBehavior href="/auth/password/forgot">
