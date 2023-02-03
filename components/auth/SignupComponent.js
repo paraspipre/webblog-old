@@ -84,7 +84,7 @@ const SignupComponent = () => {
 		{showError()}
 		{showLoading()}
 		{showMessage()}
-		<LoginGoogle />
+		{/* <LoginGoogle /> */}
 		{showForm && signupForm()}
 		<br />
 		<Link legacyBehavior href="/auth/password/forgot">

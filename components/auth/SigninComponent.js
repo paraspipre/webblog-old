@@ -81,7 +81,7 @@ const SigninComponent = () => {
 		{showError()}
 		{showLoading()}
 		{showMessage()}
-		<LoginGoogle/>
+		{/* <LoginGoogle/> */}
 		{showForm && signinForm()}
 	</React.Fragment>;
 };

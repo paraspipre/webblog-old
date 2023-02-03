@@ -6,10 +6,8 @@ import { loginWithGoogle, authenticate, isAuth } from '../../actions/auth';
 import { GOOGLE_CLIENT_ID } from '../../config';
 
 const LoginGoogle = () => {
-   console.log("1");
    const responseGoogle = async response => {
       console.log(response);
-      console.log("2");
       const tokenId = response.tokenId;
       const user = { tokenId };
 
