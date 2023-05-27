@@ -33,11 +33,12 @@ export const preSignup = user => {
 };
 
 export const signup = (user) => {
+    console.log(user)
     return fetch(`${API}/signup`, {
         method: "POST",
         headers: {
             Accept: 'application/json',
-            'Content-Type':'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(user)
     }).then(response => {
@@ -50,7 +51,7 @@ export const signin = (user) => {
         method: "POST",
         headers: {
             Accept: 'application/json',
-            'Content-Type':'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(user)
     }).then(response => {
@@ -64,10 +65,10 @@ export const signout = (next) => {
     next()
 
     return fetch(`${API}/signout`, {
-        method:'GET'
+        method: 'GET'
     }).then(response => {
         console.log('signout success')
-    }).catch(err=> console.log(err))
+    }).catch(err => console.log(err))
 }
 
 export const setCookie = (key, value) => {
@@ -94,7 +95,7 @@ export const getCookie = (key) => {
 
 export const setLocalStorage = (key, value) => {
     if (process.browser) {
-        localStorage.setItem(key,JSON.stringify(value))
+        localStorage.setItem(key, JSON.stringify(value))
     }
 }
 

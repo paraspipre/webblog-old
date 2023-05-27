@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from "react";
-import { signup,isAuth,preSignup } from "../../actions/auth";
+import React, { useState, useEffect } from "react";
+import { signup, isAuth, preSignup } from "../../actions/auth";
 import Router from "next/router";
 import Link from "next/link"
 import LoginGoogle from './LoginGoogle';
@@ -14,29 +14,29 @@ const SignupComponent = () => {
 		showForm: true
 	})
 
-	const {name,email,password,error,loading,message,showForm} = values
+	const { name, email, password, error, loading, message, showForm } = values
 
 	useEffect(() => {
 		isAuth() && Router.push('/')
 	}, [])
-	
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		//console.table({name,email,password,error,loading,message,showForm});
+		console.table({ name, email, password, error, loading, message, showForm });
 		setValues({ ...values, loading: true, error: false })
 		const user = { name, email, password }
-		
+
 		signup(user).then(data => {
 			if (data.error) {
-				setValues({...values,error:data.error,loading:false})
+				setValues({ ...values, error: data.error, loading: false })
 			} else {
-				setValues({...values,name:'',email:"",password:'',error:'',loading:false,message:data.message,showForm:false})
+				setValues({ ...values, name: '', email: "", password: '', error: '', loading: false, message: data.message, showForm: false })
 			}
 		})
 	};
-	
+
 	const handleChange = name => (e) => {
-		setValues({...values,error:false, [name]:e.target.value });
+		setValues({ ...values, error: false, [name]: e.target.value });
 	};
 
 	const showLoading = () => (loading ? <div className="alert alert-info">Loading...</div> : '')
@@ -48,7 +48,7 @@ const SignupComponent = () => {
 			<form onSubmit={handleSubmit}>
 				<div className="form-group">
 					<input
-						value = {name}
+						value={name}
 						onChange={handleChange('name')}
 						type="text"
 						className="form-control"
@@ -57,7 +57,7 @@ const SignupComponent = () => {
 				</div>
 				<div className="form-group">
 					<input
-						value = {email}
+						value={email}
 						onChange={handleChange('email')}
 						type="email"
 						className="form-control"
@@ -66,7 +66,7 @@ const SignupComponent = () => {
 				</div>
 				<div className="form-group">
 					<input
-						value = {password}
+						value={password}
 						onChange={handleChange('password')}
 						type="password"
 						className="form-control"

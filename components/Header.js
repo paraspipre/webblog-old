@@ -34,7 +34,7 @@ const Header = () => {
     <>
       <Navbar color="light" light expand="md">
         <Link href="/">
-          <NavLink className="font-weight-bold">{APP_NAME}WEBBLOG</NavLink>
+          <NavLink className="font-weight-bold">{APP_NAME}</NavLink>
         </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -89,7 +89,7 @@ const Header = () => {
           </Nav>
         </Collapse>
       </Navbar>
-      <Search/> 
+      <Search />
     </>
   );
 };
