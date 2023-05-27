@@ -14,7 +14,7 @@ const AdminIndex = () => {
                     <div className="col-md-4">
                         <ui className="list-group">
                             <li className="list-group-item">
-                                <Link legacyBehavior href="admin/crud/category-tag"><a>Create Category</a></Link>
+                                <Link legacyBehavior href="admin/crud/category"><a>Create Category</a></Link>
                             </li>
                             <li className="list-group-item">
                                 <Link legacyBehavior href="admin/crud/category-tag"><a>Create Tag</a></Link>
