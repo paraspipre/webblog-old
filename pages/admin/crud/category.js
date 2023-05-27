@@ -4,7 +4,7 @@ import Admin from "../../../components/auth/Admin"
 import Category from '../../../components/crud/Category'
 import Tag from "../../../components/crud/Tag"
 
-const Category = () => {
+const CategoryCreate = () => {
    return <Layout>
       <Admin>
          <div className="container-fluid">
@@ -22,4 +22,4 @@ const Category = () => {
    </Layout>
 }
 
-export default Category
+export default CategoryCreate
