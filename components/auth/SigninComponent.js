@@ -47,7 +47,7 @@ const SigninComponent = () => {
 	};
 
 	const showLoading = () => (
-		Loading ? <div className="d-flex justify-content-center" style={{ position: "fixed", right: "39vw", top: "37vh" }} >   <RotatingLines width="100" strokeColor="black" strokeWidth="2" /> </div> : ""
+		loading ? <div className="d-flex justify-content-center" style={{ position: "fixed", right: "39vw", top: "37vh" }} >   <RotatingLines width="100" strokeColor="black" strokeWidth="2" /> </div> : ""
 	)
 	const showError = () => (
 		error ? <div className="alert alert-danger">{error}</div> : ""
