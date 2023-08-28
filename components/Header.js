@@ -34,7 +34,7 @@ const Header = () => {
     <>
       <div id="nav">
         <Link legacyBehavior href="/">
-          <a id="logo">{APP_NAME}</a>
+          <a id="logo">WEBBLOG</a>
         </Link>
         <div className="menu-container" >
           <Link legacyBehavior href="/blogs" passHref>
