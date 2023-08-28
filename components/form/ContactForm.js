@@ -52,7 +52,7 @@ const ContactForm = ({ authorEmail }) => {
       return (
          <form onSubmit={clickSubmit} className="pb-5">
             <div className="form-group">
-               <label className="lead">Message</label>
+               <label className="lead sub-head">Message</label>
                <textarea
                   onChange={handleChange('message')}
                   type="text"
@@ -64,12 +64,12 @@ const ContactForm = ({ authorEmail }) => {
             </div>
 
             <div className="form-group">
-               <label className="lead">Name</label>
+               <label className="lead sub-head">Name</label>
                <input type="text" onChange={handleChange('name')} className="form-control" value={name} required />
             </div>
 
             <div className="form-group">
-               <label className="lead">Email</label>
+               <label className="lead sub-head">Email</label>
                <input
                   type="email"
                   onChange={handleChange('email')}
@@ -80,7 +80,7 @@ const ContactForm = ({ authorEmail }) => {
             </div>
 
             <div>
-               <button className="btn btn-primary">{buttonText}</button>
+               <button className="btn btn-dark mt-3">{buttonText}</button>
             </div>
          </form>
       );

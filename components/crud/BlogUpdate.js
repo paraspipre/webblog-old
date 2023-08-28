@@ -6,14 +6,13 @@ import { withRouter } from 'next/router';
 import { getCookie, isAuth } from '../../actions/auth';
 import { getCategories } from '../../actions/category';
 import { getTags } from '../../actions/tag';
-import { singleBlog,updateBlog } from '../../actions/blog';
+import { singleBlog, updateBlog } from '../../actions/blog';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import '../../node_modules/react-quill/dist/quill.snow.css';
 import { Quillmodules, Quillformats } from '../../helpers/quill';
 import { API } from '../../config';
 
 const BlogUpdate = ({ router }) => {
-   const [blog, setBlog] = useState({})
    const [body, setBody] = useState('')
 
    const [categories, setCategories] = useState([]);
@@ -33,19 +32,19 @@ const BlogUpdate = ({ router }) => {
    const token = getCookie('token')
 
    useEffect(() => {
-      setValues({...values,formData:new FormData()})
+      setValues({ ...values, formData: new FormData() })
       initBlog()
       initCategories()
       initTags()
    }, [router])
-   
+
    const initBlog = () => {
       if (router.query.slug) {
          singleBlog(router.query.slug).then(data => {
-            if (data.error) {
+            if (data?.error) {
                console.log(data.error)
             } else {
-               setValues({...values, title:data.title})
+               setValues({ ...values, title: data.title })
                setBody(data.body)
                setBlog(data)
                setCategoriesArray(data.categories)
@@ -57,7 +56,7 @@ const BlogUpdate = ({ router }) => {
 
    const setCategoriesArray = blogCategories => {
       let ca = []
-      blogCategories.map((c,i) => {
+      blogCategories.map((c, i) => {
          ca.push(c._id)
       })
       setChecked(ca);
@@ -73,7 +72,7 @@ const BlogUpdate = ({ router }) => {
 
    const initCategories = () => {
       getCategories().then(data => {
-         if (data.error) {
+         if (data?.error) {
             setValues({ ...values, error: data.error });
          } else {
             setCategories(data);
@@ -83,7 +82,7 @@ const BlogUpdate = ({ router }) => {
 
    const initTags = () => {
       getTags().then(data => {
-         if (data.error) {
+         if (data?.error) {
             setValues({ ...values, error: data.error });
          } else {
             setTags(data);
@@ -145,9 +144,9 @@ const BlogUpdate = ({ router }) => {
       return (
          categories &&
          categories.map((c, i) => (
-            <li key={i} className="list-unstyled">
-               <input onChange={handleToggle(c._id)} checked={findOutCategory(c._id)} type="checkbox" className="mr-2" />
-               <label className="form-check-label">{c.name}</label>
+            <li key={i} className="list-unstyled list-cat-tag">
+               <input onChange={handleToggle(c._id)} checked={findOutCategory(c._id)} type="checkbox" className="ms-2" />
+               <label className="ms-2 form-check-label">{c.name}</label>
             </li>
          ))
       );
@@ -157,9 +156,9 @@ const BlogUpdate = ({ router }) => {
       return (
          tags &&
          tags.map((t, i) => (
-            <li key={i} className="list-unstyled">
-               <input onChange={handleTagsToggle(t._id)} checked={findOutTag(t._id)} type="checkbox" className="mr-2" />
-               <label className="form-check-label">{t.name}</label>
+            <li key={i} className="list-unstyled list-cat-tag">
+               <input onChange={handleTagsToggle(t._id)} checked={findOutTag(t._id)} type="checkbox" className="ms-2" />
+               <label className="ms-2 form-check-label">{t.name}</label>
             </li>
          ))
       );
@@ -174,19 +173,19 @@ const BlogUpdate = ({ router }) => {
 
    const handleBody = e => {
       setBody(e)
-      formData.set('body',e)
-   } 
+      formData.set('body', e)
+   }
 
    const editBlog = (e) => {
       e.preventDefault()
       updateBlog(formData, token, router.query.slug).then(data => {
          if (data.error) {
-            setValues({...values,error:data.error})
+            setValues({ ...values, error: data.error })
          } else {
             setValues({ ...values, title: '', success: `Blog titled "${data.title}" is successfully updated` })
             if (isAuth() && isAuth.role === 1) {
                Router.replace(`/admin`)
-            } else if(isAuth() && isAuth.role === 0) {
+            } else if (isAuth() && isAuth.role === 0) {
                Router.replace(`/user`)
             }
          }
@@ -209,11 +208,11 @@ const BlogUpdate = ({ router }) => {
       return (
          <form onSubmit={editBlog}>
             <div className="form-group">
-               <label className="text-muted">Title</label>
+               <label className="main-head mb-2 ms-1">Title</label>
                <input type="text" className="form-control" value={title} onChange={handleChange('title')} />
             </div>
 
-            <div className="form-group">
+            <div className="form-group mt-3">
                <ReactQuill
                   modules={Quillmodules}
                   formats={Quillformats}
@@ -223,8 +222,8 @@ const BlogUpdate = ({ router }) => {
                />
             </div>
 
-            <div>
-               <button type="submit" className="btn btn-primary">
+            <div className="mt-3" >
+               <button style={{ background: "silver" }} type="submit" className="btn">
                   Update
                </button>
             </div>
@@ -241,7 +240,7 @@ const BlogUpdate = ({ router }) => {
                   {showSuccess()}
                   {showError()}
                </div>
-                 <img src={`${API}/blog/photo/${router.query.slug}`} style={{width:'100%'}} alt=""/>
+               <img src={`${API}/blog/photo/${router.query.slug}`} style={{ width: '100%' }} alt="" />
             </div>
 
             <div className="col-md-4">
@@ -250,10 +249,10 @@ const BlogUpdate = ({ router }) => {
                      <h5>Featured image</h5>
                      <hr />
 
-                     <small className="text-muted">Max size: 1mb</small>
+                     <small style={{ color: "silver" }}>Max size: 1mb</small>
                      <br />
-                     <label className="btn btn-outline-info">
-                        Upload featured image
+                     <label className="btn btn-dark mt-2">
+                        <i style={{ color: "white" }} className="fa fa-plus" ></i>
                         <input onChange={handleChange('photo')} type="file" accept="image/*" hidden />
                      </label>
                   </div>

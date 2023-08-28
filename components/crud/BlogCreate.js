@@ -9,7 +9,8 @@ import { getTags } from '../../actions/tag';
 import { createBlog } from '../../actions/blog';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import '../../node_modules/react-quill/dist/quill.snow.css';
-import { Quillmodules,Quillformats } from '../../helpers/quill';
+import { Quillmodules, Quillformats } from '../../helpers/quill';
+import { RotatingLines } from 'react-loader-spinner';
 
 const CreateBlog = ({ router }) => {
 	const blogFromLS = () => {
@@ -37,10 +38,12 @@ const CreateBlog = ({ router }) => {
 		success: '',
 		formData: '',
 		title: '',
-		hidePublishButton: false
+		hidePublishButton: false,
+		loading: false,
+		reload: false
 	});
 
-	const { error, sizeError, success, formData, title, hidePublishButton } = values;
+	const { error, sizeError, success, formData, title, hidePublishButton, loading } = values;
 	const token = getCookie('token');
 
 	useEffect(() => {
@@ -70,13 +73,14 @@ const CreateBlog = ({ router }) => {
 	};
 
 	const publishBlog = e => {
+		setValues({ ...values, loading: true });
 		e.preventDefault();
 		// console.log('ready to publishBlog');
 		createBlog(formData, token).then(data => {
 			if (data.error) {
-				setValues({ ...values, error: data.error });
+				setValues({ ...values, error: data.error, loading: false });
 			} else {
-				setValues({ ...values, title: '', error: '', success: `A new blog titled "${data.title}" is created` });
+				setValues({ ...values, loading: false, title: '', error: '', success: `A new blog titled "${data.title}" is created` });
 				setBody('');
 				setCategories([]);
 				setTags([]);
@@ -136,9 +140,9 @@ const CreateBlog = ({ router }) => {
 		return (
 			categories &&
 			categories.map((c, i) => (
-				<li key={i} className="list-unstyled">
-					<input onChange={handleToggle(c._id)} type="checkbox" className="mr-2" />
-					<label className="form-check-label">{c.name}</label>
+				<li key={i} className="list-unstyled list-cat-tag">
+					<input onChange={handleToggle(c._id)} type="checkbox" className="ms-2" />
+					<label className="ms-2 form-check-label">{c.name}</label>
 				</li>
 			))
 		);
@@ -148,9 +152,9 @@ const CreateBlog = ({ router }) => {
 		return (
 			tags &&
 			tags.map((t, i) => (
-				<li key={i} className="list-unstyled">
-					<input onChange={handleTagsToggle(t._id)} type="checkbox" className="mr-2" />
-					<label className="form-check-label">{t.name}</label>
+				<li key={i} className="list-unstyled list-cat-tag">
+					<input onChange={handleTagsToggle(t._id)} type="checkbox" className="ms-2" />
+					<label className="ms-2 form-check-label">{t.name}</label>
 				</li>
 			))
 		);
@@ -163,26 +167,30 @@ const CreateBlog = ({ router }) => {
 		<div className='alert alert-success' style={{ display: success ? "" : 'none' }} >{success}</div>
 	}
 
+
+	const showLoading = () => (loading ? <div className="d-flex justify-content-center mt-4" style={{ position: "fixed", right: "39vw", top: "33vh" }} >   <RotatingLines width="100" strokeColor="silver" strokeWidth="2" /> </div> : "")
+
 	const createBlogForm = () => {
 		return (
 			<form onSubmit={publishBlog}>
 				<div className="form-group">
-					<label className="text-muted">Title</label>
+					<label className="main-head mb-2 ms-1 ">Title</label>
 					<input type="text" className="form-control" value={title} onChange={handleChange('title')} />
 				</div>
 
-				<div className="form-group">
+				<div className="form-group mt-3">
 					<ReactQuill
 						modules={Quillmodules}
 						formats={Quillformats}
 						value={body}
 						placeholder="Write something amazing..."
 						onChange={handleBody}
+						preserveWhitespace={true}
 					/>
 				</div>
 
-				<div>
-					<button type="submit" className="btn btn-primary">
+				<div className="mt-3">
+					<button style={{ background: "silver" }} type="submit" className="btn">
 						Publish
 					</button>
 				</div>
@@ -198,31 +206,32 @@ const CreateBlog = ({ router }) => {
 					<div className='pt-3'>
 						{showError()}
 						{showSuccess()}
+						{showLoading()}
 					</div>
 				</div>
 
 				<div className="col-md-4">
 					<div>
 						<div className="form-group pb-2">
-							<h5>Featured image</h5>
+							<h5 className="sub-head">Featured image</h5>
 							<hr />
 
-							<small className="text-muted">Max size: 1mb</small>
+							<small style={{ color: "silver" }} >Max size: 1mb</small>
 							<br />
-							<label className="btn btn-outline-info">
-								Upload featured image
+							<label className="btn btn-dark mt-2">
+								<i style={{ color: "white" }} className="fa fa-plus" ></i>
 								<input onChange={handleChange('photo')} type="file" accept="image/*" hidden />
 							</label>
 						</div>
 					</div>
 					<div>
-						<h5>Categories</h5>
+						<h5 className="sub-head">Categories</h5>
 						<hr />
-							
+
 						<ul style={{ maxHeight: '200px', overflowY: 'scroll' }}>{showCategories()}</ul>
 					</div>
 					<div>
-						<h5>Tags</h5>
+						<h5 className="sub-head">Tags</h5>
 						<hr />
 						<ul style={{ maxHeight: '200px', overflowY: 'scroll' }}>{showTags()}</ul>
 					</div>

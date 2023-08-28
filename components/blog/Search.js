@@ -25,13 +25,13 @@ const Search = () => {
 
    const searchBlogs = (results = []) => {
       return (
-         <div className='jumbotron bg-white'>
-            {message && <p className='pt-4 text-muted font-italic'></p>}
+         <div className='jumbotron'>
+            {message && <p className='pt-4 sub-head'></p>}
             {results.map((blog, i) => {
                return (
                   <div key={i}>
                      <Link legacyBehavior href={`/blogs/${blog.slug}`}>
-                        <a className='text-primary' >{blog.title}</a>
+                        <a style={{ textDecoration: "underline" }} className='text-white mt-3' >{blog.title}</a>
                      </Link>
                   </div>
                )
@@ -41,15 +41,11 @@ const Search = () => {
    }
 
    const searchForm = () => {
-      return(
+      return (
          <form onSubmit={searchSubmit}>
-            <div className='row'>
-         <div className='col-md-8'>
-            <input type="search" className='form-control' placeholder='Search blogs' onChange={handleChange} />
-         </div>
-         <div className='col-md-4'>
-            <button className='btn btn-block btn-outline-primary' type='submit'>Search</button>
-               </div>
+            <div className='search-box'>
+               <button className='btn-search' type='submit'><i className="fas fa-search"></i></button>
+               <input type="search" className='input-search' placeholder='Search blogs' onChange={handleChange} />
             </div>
          </form>
       )
@@ -58,7 +54,7 @@ const Search = () => {
    return (
       <div className='container-fluid'>
          <div className='pt-3 pb-5'>{searchForm()}</div>
-         {searched && <div style={{ marginTop: '-120px', marginBottom: '-80px' }} >{searchBlogs(results)}</div>}
+         {searched && <div style={{ marginTop: '15px', marginBottom: '20px', position: 'absolute', zIndex: '100', left: "100px" }} >{searchBlogs(results)}</div>}
       </div>
    )
 }

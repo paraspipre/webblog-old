@@ -15,8 +15,8 @@ const SingleBlog = ({ blog, query }) => {
 
    const loadRelated = () => {
       listRelated({ blog }).then(data => {
-         if (data.error) {
-            console.log(data.error);
+         if (data?.error) {
+            console.log(data?.error);
          } else {
             setRelated(data);
          }
@@ -30,43 +30,41 @@ const SingleBlog = ({ blog, query }) => {
    const head = () => (
       <Head>
          <title>
-            {blog.title} | {APP_NAME}
+            {blog?.title} | {APP_NAME}
          </title>
-         <meta name="description" content={blog.mdesc} />
+         <meta name="description" content={blog?.mdesc} />
          <link rel="canonical" href={`${DOMAIN}/blogs/${query.slug}`} />
-         <meta property="og:title" content={`${blog.title}| ${APP_NAME}`} />
-         <meta property="og:description" content={blog.mdesc} />
+         <meta property="og:title" content={`${blog?.title}| ${APP_NAME}`} />
+         <meta property="og:description" content={blog?.mdesc} />
          <meta property="og:type" content="webiste" />
          <meta property="og:url" content={`${DOMAIN}/blogs/${query.slug}`} />
          <meta property="og:site_name" content={`${APP_NAME}`} />
 
-         <meta property="og:image" content={`${API}/blog/photo/${blog.slug}`} />
-         <meta property="og:image:secure_url" ccontent={`${API}/blog/photo/${blog.slug}`} />
+         <meta property="og:image" content={`${API}/blog/photo/${blog?.slug}`} />
+         <meta property="og:image:secure_url" ccontent={`${API}/blog/photo/${blog?.slug}`} />
          <meta property="og:image:type" content="image/jpg" />
          <meta property="fb:app_id" content={`${FB_APP_ID}`} />
       </Head>
    );
 
    const showBlogCategories = blog =>
-      blog.categories.map((c, i) => (
+      blog?.categories.map((c, i) => (
          <Link legacyBehavior key={i} href={`/categories/${c.slug}`}>
-            <a className="btn btn-primary mr-1 ml-1 mt-3">{c.name}</a>
+            <a className="tag cat-all t-one mt-2 me-1">{c.name}</a>
          </Link>
       ));
 
    const showBlogTags = blog =>
-      blog.tags.map((t, i) => (
+      blog?.tags.map((t, i) => (
          <Link legacyBehavior key={i} href={`/tags/${t.slug}`}>
-            <a className="btn btn-outline-primary mr-1 ml-1 mt-3">{t.name}</a>
+            <a className="tag tag-all mt-2 me-1">{t.name}</a>
          </Link>
       ));
 
    const showRelatedBlog = () => {
-      return related.map((blog, i) => (
+      return related?.map((blog, i) => (
          <div className="col-md-4" key={i}>
-            <article>
-               <SmallCard blog={blog} />
-            </article>
+            <SmallCard blog={blog} />
          </div>
       ));
    };
@@ -74,7 +72,7 @@ const SingleBlog = ({ blog, query }) => {
    const showComments = () => {
       return (
          <div>
-            <DisqusThread id={blog.id} title={blog.title} path={`/blog/${blog.slug}`} />
+            <DisqusThread id={blog?.id} title={blog?.title} path={`/blog/${blog?.slug}`} />
          </div>
       );
    };
@@ -87,10 +85,10 @@ const SingleBlog = ({ blog, query }) => {
                <article>
                   <div className="container-fluid">
                      <section>
-                        <div className="row" style={{ marginTop: '-30px' }}>
+                        <div className="row" style={{ marginTop: '100px' }}>
                            <img
-                              src={`${API}/blog/photo/${blog.slug}`}
-                              alt={blog.title}
+                              src={`${API}/blog/photo/${blog?.slug}`}
+                              alt={blog?.title}
                               className="img img-fluid featured-image"
                            />
                         </div>
@@ -98,37 +96,38 @@ const SingleBlog = ({ blog, query }) => {
 
                      <section>
                         <div className="container">
-                           <h1 className="display-2 pb-3 pt-3 text-center font-weight-bold">{blog.title}</h1>
-                           <p className="lead mt-3 mark">
+                           <h1 className="display-2 pb-3 pt-3 text-center font-weight-bold  main-head">{blog?.title}</h1>
+                           <p style={{ backgroundColor: "#D6C5F0", borderRadius: "5px" }} className="lead mt-3 mark">
                               Written by{' '}
-                              <Link legacyBehavior href={`/profile/${blog.postedBy.username}`}>
-                                 <a>{blog.postedBy.username}</a>
+                              <Link legacyBehavior href={`/profile/${blog?.postedBy.username}`}>
+                                 <a style={{ color: "#9153F4" }}>{blog?.postedBy.username}</a>
                               </Link>{' '}
-                              | Published {moment(blog.updatedAt).fromNow()}
+                              | Published {moment(blog?.updatedAt).fromNow()}
                            </p>
 
-                           <div className="pb-3">
+                           <div className="d-flex flex-wrap">
                               {showBlogCategories(blog)}
+                           </div>
+                           <br />
+                           <div className="mb-3 d-flex flex-wrap">
                               {showBlogTags(blog)}
-                              <br />
-                              <br />
                            </div>
                         </div>
                      </section>
                   </div>
 
-                  <div className="container">
+                  <div className="container-fluid">
                      <section>
-                        <div className="col-md-12 lead">{renderHTML(blog.body)}</div>
+                        <div style={{ wordWrap: "break-word", color: 'white' }} className="">{renderHTML(blog?.body)}</div>
                      </section>
                   </div>
 
                   <div className="container">
-                     <h4 className="text-center pt-5 pb-5 h2">Related blogs</h4>
+                     <h4 className="text-center pt-5 pb-5 h2 main-head">Related blogs</h4>
                      <div className="row">{showRelatedBlog()}</div>
                   </div>
 
-                  <div className="container pt-5 pb-5">{showComments()}</div>
+                  <div className="container pb-5 mt-3 pt-3 text-white">{showComments()}</div>
                </article>
             </main>
          </Layout>
@@ -138,8 +137,8 @@ const SingleBlog = ({ blog, query }) => {
 
 SingleBlog.getInitialProps = ({ query }) => {
    return singleBlog(query.slug).then(data => {
-      if (data.error) {
-         console.log(data.error);
+      if (data?.error) {
+         console.log(data?.error);
       } else {
          // console.log('GET INITIAL PROPS IN SINGLE BLOG', data);
          return { blog: data, query };

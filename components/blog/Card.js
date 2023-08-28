@@ -5,56 +5,63 @@ import { API } from '../../config'
 
 
 const Card = ({ blog }) => {
-   const showBlogCategories = blog =>{
+
+   const showBlogCategories = blog => {
       return blog.categories.map((c, i) => (
          <Link legacyBehavior key={i} href={`/categories/${c.slug}`} >
-            <a className='btn btn-primary mr-1 ml-1 mt-3'>{c.name}</a>
+            <a className='tag cat-all ms-1 mt-3'>{c.name}</a>
          </Link>
       ))
    }
    const showBlogTags = blog => {
-      return blog.tags.map((t, i) => ( 
+      return blog.tags.map((t, i) => (
          <Link legacyBehavior key={i} href={`/tags/${t.slug}`} >
-            <a className='btn btn-outline-primary mr-1 ml-1 mt-3'>{t.name}</a>
+            <a className='tag tag-all ms-1 mt-3'>{t.name}</a>
          </Link>
       ))
    }
    return (
-      <div className='lead pb-4'>
-         <div>
-            
-            <Link legacyBehavior href={`/blogs/${blog.slug}`}>
-            <a><h2 className=' pt-3 pb-3 font-weight-bold' >{blog.title}</h2></a>
-            </Link>
-         </div>
-         <section>
-            <p className='mark ml-1 pt-2 pb-2' >
-               Written by <Link legacyBehavior href={`/profile/${blog.postedBy.username}`}>
-                  <a>{blog.postedBy.username}</a>
-               </Link>  | Published {moment(blog.updatedAt).fromNow()}
-            </p>
-         </section>
-         <section>
-            {showBlogCategories(blog)}
-            {showBlogTags(blog)}
-            <br />
-            <br/>
-         </section>
-         <div className='row'>
-            <div className='col-md-4'>
-               <section>
-                  <img className='img img-fluid' style={{maxHeight:'auto',width:'100%'}} src={`${API}/blog/photo/${blog.slug}`} alt={blog.title}/>
-               </section>
+
+      <div style={{ backgroundImage: `url(${API}/blog/photo/${blog.slug})` }} class="blog-container container-fluid">
+         <div class="blog-header">
+            <div class="blog-cover">
+               <div class="blog-author">
+                  Written by <Link legacyBehavior href={`/profile/${blog.postedBy.username}`} ><a className="user-info" >{blog.postedBy.name}</a></Link>
+               </div>
             </div>
-            <div className='col-md-8'>
-               <section>
-                  <div className='pb-3 ' >{renderHTML(blog.excerpt)}</div>
-                  <Link legacyBehavior href={`/blogs/${blog.slug}`}>
-                     <a className='btn btn-primary pt-2'>Read more</a>
-                  </Link>
-               </section>
-            </div> 
          </div>
+
+         <div class="blog-body">
+            <div class="blog-title">
+               <Link legacyBehavior href={`/blogs/${blog.slug}`}>
+                  <a>
+                     <h3 className=" pb-3 font-weight-bold card-head">
+                        {blog.title}
+                     </h3>
+                  </a>
+               </Link>
+            </div>
+            <div class="blog-summary">
+
+               <p style={{ wordWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: blog.excerpt }}></p>
+            </div>
+            <Link legacyBehavior href={`/blogs/${blog.slug}`}>
+               <button id="btn-read" >
+                  Read more<i className="fa fa-arrow-right ms-1"  ></i>
+               </button>
+            </Link>
+            <div class="d-flex flex-wrap">
+               {showBlogCategories(blog)}
+               {showBlogTags(blog)}
+            </div>
+         </div>
+
+         <div class="blog-footer mt-3">
+            <ul>
+               <li class="published-date">Published {moment(blog.createdAt).fromNow()}</li>
+            </ul>
+         </div>
+
       </div>
    )
 }

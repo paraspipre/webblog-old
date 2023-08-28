@@ -51,14 +51,22 @@ const UserProfile = ({ user, blogs, query }) => {
                         <div className="card-body">
                            <div className="row">
                               <div className="col-md-8">
-                                 <h5>{user.name}</h5>
-                                 <p className="text-muted">Joined {moment(user.createdAt).fromNow()}</p>
+                                 <h5 className="main-head">{user.name.toUpperCase()}</h5>
+                                 <p className="sub-head">
+                                    Joined {moment(user.updatedAt).fromNow()}
+                                 </p>
+                                 <h6 className="sub-head"> {user.about}</h6>
                               </div>
                               <div className="col-md-4">
                                  <img
                                     src={`${API}/user/photo/${user.username}`}
                                     className="img img-fluid img-thumbnail mb-3"
-                                    style={{ maxHeight: '100px', maxWidth: '100%' }}
+                                    style={{
+                                       maxHeight: '100px', maxWidth: '100%',
+                                       borderRadius: "50%",
+                                       marginTop: "20px",
+                                       boxShadow: "0 0 8px rgba(255,255,255,0.5)",
+                                    }}
                                     alt="user profile"
                                  />
                               </div>
@@ -76,7 +84,10 @@ const UserProfile = ({ user, blogs, query }) => {
                   <div className="col-md-6">
                      <div className="card">
                         <div className="card-body">
-                           <h5 className="card-title bg-primary pt-4 pb-4 pl-4 pr-4 text-white">
+                           <h5 style={{
+                              borderRadius: "5px",
+                              boxShadow: "0 0 8px rgba(255,255,255,0.5)",
+                           }} className="card-title bg-dark pt-4 pb-4 ps-4 pe-4 text-white">
                               Recent blogs by {user.name}
                            </h5>
 
@@ -88,8 +99,14 @@ const UserProfile = ({ user, blogs, query }) => {
                   <div className="col-md-6">
                      <div className="card">
                         <div className="card-body">
-                           <h5 className="card-title bg-primary pt-4 pb-4 pl-4 pr-4 text-light">
-                              Message {user.name}
+                           <h5
+                              style={{
+                                 borderRadius: "5px",
+                                 boxShadow: "0 0 8px rgba(255,255,255,0.5)",
+                              }}
+                              className="card-title bg-dark pt-2 pb-2 ps-2 pe-2 text-white"
+                           >
+                              Message {user.name.toUpperCase()}
                            </h5>
                            <br />
                            <ContactForm authorEmail={user.email} />

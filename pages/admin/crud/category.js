@@ -10,7 +10,7 @@ const CategoryCreate = () => {
          <div className="container-fluid">
             <div className="row">
                <div className="col-md-12 pt-5">
-                  <h2>Manage Categories and Tags</h2>
+                  <h2 className="main-head">Manage Categories</h2>
                </div>
                <div className="col-md-6 pt-5">
                   <Category />

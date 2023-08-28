@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { React,useState, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import Router from 'next/router';
 import { getCookie, isAuth } from '../../actions/auth';
 import { list, removeBlog } from '../../actions/blog';
@@ -46,13 +46,13 @@ const BlogRead = ({ username }) => {
       if (isAuth() && isAuth().role === 0) {
          return (
             <Link legacyBehavior href={`/user/crud/${blog.slug}`}>
-               <a className="ml-2 btn btn-sm btn-warning">Update</a>
+               <a className="btn btn-dark ms-2"><i className="fa fa-edit"></i></a>
             </Link>
          );
       } else if (isAuth() && isAuth().role === 1) {
          return (
             <Link legacyBehavior href={`/admin/crud/${blog.slug}`}>
-               <a className="ml-2 btn btn-sm btn-warning">Update</a>
+               <a className="btn btn-dark ms-2"><i className="fa fa-edit"></i></a>
             </Link>
          );
       }
@@ -62,12 +62,12 @@ const BlogRead = ({ username }) => {
       return blogs.map((blog, i) => {
          return (
             <div key={i} className="pb-5">
-               <h3>{blog.title}</h3>
-               <p className="mark">
+               <h3 className="sub-head">{blog.title}</h3>
+               <p style={{ backgroundColor: "silver" }} className="mark">
                   Written by {blog.postedBy.name} | Published on {moment(blog.updatedAt).fromNow()}
                </p>
-               <button className="btn btn-sm btn-danger" onClick={() => deleteConfirm(blog.slug)}>
-                  Delete
+               <button className="btn btn-dark" onClick={() => deleteConfirm(blog.slug)}>
+                  <i className="fa fa-trash" ></i>
                </button>
                {showUpdateButton(blog)}
             </div>
@@ -75,11 +75,15 @@ const BlogRead = ({ username }) => {
       });
    };
 
+   const mouseMoveHandler = (e) => {
+      setMessage(false);
+   };
+
    return (
       <>
-         <div className="row">
+         <div onMouseMove={mouseMoveHandler} className="row">
             <div className="col-md-12">
-               {message && <div className="alert alert-warning">{message}</div>}
+               {message && <div className="show-result">{message}</div>}
                {showAllBlogs()}
             </div>
          </div>

@@ -32,63 +32,44 @@ const Header = () => {
   };
   return (
     <>
-      <Navbar color="light" light expand="md">
-        <Link href="/">
-          <NavLink className="font-weight-bold">{APP_NAME}</NavLink>
+      <div id="nav">
+        <Link legacyBehavior href="/">
+          <a id="logo">{APP_NAME}</a>
         </Link>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto" navbar>
-
-            <NavItem>
-              <Link href="/blogs">
-                <NavLink style={{ cursor: 'pointer' }}>Blogs</NavLink>
+        <div className="menu-container" >
+          <Link legacyBehavior href="/blogs" passHref>
+            <a id="menulink" title="Blogs"  ><i className="fa fa-newspaper"></i></a >
+          </Link>
+          <Link legacyBehavior href="/user/crud/blog" passHref>
+            <a id="menulink" title="create a blog"><i className="fa fa-pen-to-square"></i></a >
+          </Link>
+          {!isAuth() && (
+            <>
+              <Link legacyBehavior href="/signin" passHref>
+                <a id="menulink" title="signIn" href="/signup"><i className="fa fa-sign-in"></i></a >
               </Link>
-            </NavItem>
-
-            {isAuth() && isAuth().role === 1 &&
-              (<NavItem>
-                <Link href="/admin">
-                  <NavLink style={{ cursor: 'pointer' }}>{`${isAuth().name}'s Dashboard`}</NavLink>
-                </Link>
-              </NavItem>)
-            }
-            {isAuth() && isAuth().role == 0 &&
-              (<NavItem>
-                <Link href="/user">
-                  <NavLink style={{ cursor: 'pointer' }}>{`${isAuth().name}'s Dashboard`}</NavLink>
-                </Link>
-              </NavItem>)
-            }
-
-
-            {!isAuth() && <>
-              <NavItem>
-                <Link href="/signin">
-                  <NavLink style={{ cursor: 'pointer' }}>Signin</NavLink>
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link href="/signup">
-                  <NavLink style={{ cursor: 'pointer' }}>Signup</NavLink>
-                </Link>
-              </NavItem>
-            </>}
-            {isAuth() && (
-              <NavItem>
-                <NavLink style={{ cursor: 'pointer' }} onClick={() => signout(() => Router.replace('/signin'))}>Signout</NavLink>
-              </NavItem>
-            )}
-
-            <NavItem>
-              <Link href="/user/crud/blog">
-                <NavLink className="btn btn-primary text-light">Write a blog</NavLink>
+              <Link legacyBehavior href="/signup" passHref>
+                <a id="menulink" title="signUp" href="/signup"><i className="fa fa-user-plus"></i></a>
               </Link>
-            </NavItem>
+            </>
+          )}
 
-          </Nav>
-        </Collapse>
-      </Navbar>
+          {isAuth() && (
+            <>
+              <Link legacyBehavior href={isAuth().role === 1 ? "/admin" : "/user"} passHref>
+                <a id="menulink" title={`${isAuth().name}`} href={isAuth().role === 1 ? "/admin" : "/user"}>
+                  <i class="fa fa-user" ></i>
+                </a >
+              </Link>
+              <Link legacyBehavior href="/signin" passHref>
+                <a id="menulink" title="signOut" onClick={() => signOut(() => Router.push("/signin"))}>
+                  <i className="fa fa-power-off"></i>
+                </a>
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
       <Search />
     </>
   );

@@ -34,6 +34,7 @@ const LoginGoogle = () => {
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             theme="dark"
+            cookiePolicy='single_host_origin'
          />
       </div>
    );

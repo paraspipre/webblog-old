@@ -8,31 +8,88 @@ const AdminIndex = () => {
         <Admin>
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-md-12 pt-5 pb-5">
-                        <h2>Admin Dashboard</h2>
+                    <h1 className="main-head">Hello Admin</h1>
+                </div>
+
+                <div className="all">
+                    <div className="row ">
+                        <div className="col-md-6">
+                            <Link legacyBehavior href="/admin/crud/category-tag">
+                                <a>
+                                    <div class="admin-option">
+                                        <div class="icon-set">
+                                            <i className="fa fa-comment"></i>
+                                        </div>
+                                        Create Category
+                                    </div>
+                                </a>
+                            </Link>
+                        </div>
+                        <div className="col-md-6">
+                            <Link legacyBehavior href="/admin/crud/category-tag">
+                                <a>
+                                    <div class="admin-option ">
+                                        <div class="icon-set">
+                                            <i class="fa fa-hashtag"></i>
+                                        </div>
+                                        create tag
+                                    </div>
+                                </a>
+                            </Link>
+                        </div>
                     </div>
-                    <div className="col-md-4">
-                        <ui className="list-group">
-                            <li className="list-group-item">
-                                <Link legacyBehavior href="admin/crud/category"><a>Create Category</a></Link>
-                            </li>
-                            <li className="list-group-item">
-                                <Link legacyBehavior href="admin/crud/category-tag"><a>Create Tag</a></Link>
-                            </li>
-                            <li className="list-group-item">
-                                <Link legacyBehavior href="admin/crud/blog"><a>Create Blog</a></Link>
-                            </li>
-                            <li className="list-group-item">
-                                <Link legacyBehavior href="admin/crud/blogs"><a>Update/Delete Blog</a></Link>
-                            </li>
-                            <li className="list-group-item">
-                                <Link legacyBehavior href="/user/update">
-                                    <a>Update Profile</a>
-                                </Link>
-                            </li>
-                        </ui>
+                    <div className="row ">
+                        <div className="col-md-6">
+                            <Link legacyBehavior href="/admin/crud/blog">
+                                <a>
+                                    <div class="admin-option">
+                                        <div class="icon-set">
+                                            <i class="fa fa-pen"></i>
+                                        </div>
+                                        create Blog
+                                    </div>
+                                </a>
+                            </Link>
+                        </div>
+                        <div className="col-md-6">
+                            <Link legacyBehavior href="/user/crud/blogs">
+                                <a>
+                                    <div class="admin-option ">
+                                        <div class="icon-set">
+                                            <i class="fa fa-edit"></i>
+                                        </div>
+                                        Update Blog
+                                    </div>
+                                </a>
+                            </Link>
+                        </div>
                     </div>
-                    {/* <div className="col-md-8"></div> */}
+                    <div className="row">
+                        <div className="col-md-6">
+                            <Link legacyBehavior href="/user/crud/blogs">
+                                <a>
+                                    <div class="admin-option">
+                                        <div class="icon-set">
+                                            <i class="fa fa-trash"></i>
+                                        </div>
+                                        Delete Blog
+                                    </div>
+                                </a>
+                            </Link>
+                        </div>
+                        <div className="col-md-6">
+                            <Link legacyBehavior href="/user/update">
+                                <a>
+                                    <div class="admin-option">
+                                        <div class="icon-set">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        Update profile
+                                    </div>
+                                </a>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </Admin>

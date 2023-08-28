@@ -5,25 +5,25 @@ import { API } from '../../config';
 
 const SmallCard = ({ blog }) => {
    return (
-      <div className="card">
-         <section>
+      <div className="c">
+         <div style={{ margin: "auto", marginTop: "20px" }}>
             <Link legacyBehavior href={`/blogs/${blog.slug}`}>
                <a>
                   <img
                      className="img img-fluid"
-                     style={{ height: '250px', width: '100%' }}
+                     style={{ height: '140px', width: '100%' }}
                      src={`${API}/blog/photo/${blog.slug}`}
                      alt={blog.title}
                   />
                </a>
             </Link>
-         </section>
+         </div>
 
          <div className="card-body">
             <section>
                <Link legacyBehavior href={`/blogs/${blog.slug}`}>
                   <a>
-                     <h5 className="card-title">{blog.title}</h5>
+                     <h5 style={{ cursor: "pointer", color: '#9153F4' }} className="card-title">{blog.title}</h5>
                   </a>
                </Link>
                <div className="card-text">{renderHTML(blog.excerpt)}</div>
@@ -33,7 +33,7 @@ const SmallCard = ({ blog }) => {
          <div className="card-body">
             Posted {moment(blog.updatedAt).fromNow()} by{' '}
             <Link legacyBehavior href={`/profile/${blog.postedBy.username}`}>
-               <a>{blog.postedBy.username}</a>
+               <a style={{ color: '#9153F4' }}>{blog.postedBy.username}</a>
             </Link>
          </div>
       </div>
@@ -41,3 +41,27 @@ const SmallCard = ({ blog }) => {
 };
 
 export default SmallCard;
+
+{/* <div className="col-md-4">
+   <div className="c">
+      <div className="card-header">
+         <img
+            src="https://images.unsplash.com/photo-1640499900704-b00dd6a1103a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bWFydmVsJTIwYXZlbmdlcnN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60"
+            alt="rover"
+         />
+      </div>
+      <div className="card-body">
+         <span className="tag tag-teal">Christopher Nolan</span>
+         <span style={{ color: "black" }} class="tag t-one">
+            #science fiction
+         </span>
+         <Link href="/blogs">
+            <h4 className="card-link mt-4">
+               Why is the Tesla Cybertruck designed the way it is?
+            </h4>
+         </Link>
+
+         <p>An exploration into the truck's polarising design</p>
+      </div>
+   </div>
+</div> */}

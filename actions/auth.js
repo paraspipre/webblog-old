@@ -106,8 +106,8 @@ export const removeLocalStorage = (key) => {
 }
 
 export const authenticate = (data, next) => {
-    setCookie('token', data.token)
-    setLocalStorage('user', data.user)
+    setCookie('token', data?.token)
+    setLocalStorage('user', data?.user)
     next()
 }
 
@@ -115,7 +115,7 @@ export const isAuth = () => {
     if (process.browser) {
         const cookieChecked = getCookie('token')
         if (cookieChecked) {
-            if (localStorage.getItem('user')) {
+            if (localStorage.getItem('user') != undefined) {
                 return JSON.parse(localStorage.getItem('user'))
             } else {
                 return false
@@ -127,7 +127,7 @@ export const isAuth = () => {
 
 export const updateUser = (user, next) => {
     if (process.browser) {
-        if (localStorage.getItem('user')) {
+        if (localStorage.getItem('user') != undefined) {
             let auth = JSON.parse(localStorage.getItem('user'));
             auth = user;
             localStorage.setItem('user', JSON.stringify(auth));
@@ -261,10 +261,10 @@ export const loginWithGoogle = user => {
 // }
 
 // exports.authenticate = (data, next) => {
-//     cookie.set('token', data.token, {
+//     cookie.set('token', data?.token, {
 //         expires: 1
 //     })
-//     localStorage.setItem('user',data.user)
+//     localStorage.setItem('user',data?.user)
 //     next()
 // }
 

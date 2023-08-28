@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { listBlogsWithCategoriesAndTags } from '../../actions/blog';
 import Card from '../../components/blog/Card';
 import { API, DOMAIN, APP_NAME, FB_APP_ID } from '../../config';
+import Search from '../../components/blog/Search';
 
 const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, router }) => {
 	const head = () => (
@@ -54,9 +55,7 @@ const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, rout
 		return (
 			size > 0 &&
 			size >= limit && (
-				<button onClick={loadMore} className="btn btn-outline-primary btn-lg">
-					Load more
-				</button>
+				<i onClick={loadMore} className="fa fa-arrow-down load-more"></i>
 			)
 		);
 	};
@@ -76,7 +75,7 @@ const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, rout
 	const showAllCategories = () => {
 		return categories.map((c, i) => (
 			<Link legacyBehavior href={`/categories/${c.slug}`} key={i}>
-				<a className="btn btn-primary mr-1 ml-1 mt-3">{c.name}</a>
+				<a className="tag cat-all ms-1 mt-3">{c.name}</a>
 			</Link>
 		));
 	};
@@ -84,7 +83,7 @@ const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, rout
 	const showAllTags = () => {
 		return tags.map((t, i) => (
 			<Link legacyBehavior href={`/tags/${t.slug}`} key={i}>
-				<a className="btn btn-outline-primary mr-1 ml-1 mt-3">{t.name}</a>
+				<a className="tag cat-all ms-1 mt-3">{t.name}</a>
 			</Link>
 		));
 	};
@@ -101,21 +100,24 @@ const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, rout
 		<>
 			{head()}
 			<Layout>
+				<Search />
 				<main>
-					<div className="container-fluid">
+					<div className="container-fluid d-flex justify-content-center mt-5">
 						<header>
-							<div className="col-md-12 pt-3">
-								<h1 className="display-4 font-weight-bold text-center">
-									Programming blogs and tutorials
+							<div className="col-md-12">
+								<h1 className="mb-5 main-head font-weight-bold text-center">
+									All blogs are together at one place
 								</h1>
 							</div>
-							<section>
-								<div className="pb-5 text-center">
+							<div className="">
+								<div className="text-center d-flex flex-wrap">
 									{showAllCategories()}
-									<br />
+								</div>
+								<br />
+								<div className=" text-center d-flex flex-wrap">
 									{showAllTags()}
 								</div>
-							</section>
+							</div>
 						</header>
 					</div>
 					<div className="container-fluid">{showAllBlogs()}</div>
@@ -131,8 +133,8 @@ Blogs.getInitialProps = () => {
 	let skip = 0;
 	let limit = 2;
 	return listBlogsWithCategoriesAndTags(skip, limit).then(data => {
-		if (data.error) {
-			console.log(data.error);
+		if (data?.error) {
+			console.log(data?.error);
 		} else {
 			return {
 				blogs: data.blogs,
