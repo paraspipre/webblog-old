@@ -35,17 +35,17 @@ const Index = () => {
                                     />
                                 </div>
                                 <div className="card-body">
-                                    <span className="tag tag-teal">Christopher Nolan</span>
+                                    <span className="tag tag-teal">Marvel Avengers</span>
                                     <span style={{ color: "black" }} class="tag t-one">
                                         #science fiction
                                     </span>
                                     <Link href="/blogs">
                                         <h4 className="card-link mt-4">
-                                            Why is the Tesla Cybertruck designed the way it is?
+                                            Why is the MCU designed the way it is?
                                         </h4>
                                     </Link>
 
-                                    <p>An exploration into the truck's polarising design</p>
+                                    <p>An exploration into the MCU.</p>
                                 </div>
                             </div>
                         </div>
@@ -62,12 +62,12 @@ const Index = () => {
                                     </span>
                                     <Link href="/blogs">
                                         <h4 className="card-link mt-4">
-                                            Moon Knight Is Unlike Any Other Superhero Show
+                                            Moon Knight Is Unlike Any Other Superhero
                                         </h4>
                                     </Link>
                                     <p>
                                         Going into Moon Knight, I had few expectations. I wasn’t
-                                        familiar with the character. All I knew about .
+                                        familiar with the character.
                                     </p>
                                 </div>
                             </div>
@@ -86,17 +86,15 @@ const Index = () => {
 
                                     <span className="tag tag-teal">Netflix</span>
                                     <span style={{ color: "black" }} class="tag t-one">
-                                        #stranger_things
+                                        #spiderman
                                     </span>
                                     <Link href="/blogs">
                                         <h4 className="card-link mt-4">
-                                            We Need to Talk About the Stranger Things Season 4
+                                            We Need to Talk About the Spider Man
                                         </h4>
                                     </Link>
                                     <p>
-                                        Vecna gets a horrifying origin story, Hopper battles a
-                                        familiar foe, and the kiddos learn more about the Upside
-                                        Down.
+                                        Spiderman 2099 horrifying origin story..
                                     </p>
                                 </div>
                             </div>

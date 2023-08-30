@@ -6,7 +6,7 @@ import { API } from '../../config';
 const SmallCard = ({ blog }) => {
    return (
       <div className="c">
-         <div style={{ margin: "auto", marginTop: "20px" }}>
+         <div className='card-header' style={{ margin: "auto", marginTop: "20px" }}>
             <Link legacyBehavior href={`/blogs/${blog.slug}`}>
                <a>
                   <img
@@ -20,17 +20,14 @@ const SmallCard = ({ blog }) => {
          </div>
 
          <div className="card-body">
-            <section>
-               <Link legacyBehavior href={`/blogs/${blog.slug}`}>
-                  <a>
-                     <h5 style={{ cursor: "pointer", color: '#9153F4' }} className="card-title">{blog.title}</h5>
-                  </a>
-               </Link>
-               <div className="card-text">{renderHTML(blog.excerpt)}</div>
-            </section>
+            <Link legacyBehavior href={`/blogs/${blog.slug}`}>
+               <h4 style={{ cursor: "pointer", color: '#9153F4' }} className="card-title">{blog.title}</h4>
+            </Link>
+            <div className="card-text">{renderHTML(blog.excerpt)}</div>
+
          </div>
 
-         <div className="card-body">
+         <div className="card-body" style={{ padding: "20px" }}>
             Posted {moment(blog.updatedAt).fromNow()} by{' '}
             <Link legacyBehavior href={`/profile/${blog.postedBy.username}`}>
                <a style={{ color: '#9153F4' }}>{blog.postedBy.username}</a>

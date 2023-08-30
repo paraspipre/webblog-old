@@ -12,7 +12,7 @@ const LoginGoogle = () => {
       const user = { tokenId };
 
       loginWithGoogle(user).then(data => {
-         if (data.error) {
+         if (data?.error) {
             console.log(data.error);
          } else {
             authenticate(data, () => {

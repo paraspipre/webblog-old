@@ -91,10 +91,10 @@ const SigninComponent = () => {
 		<br />
 		{showForm && signinForm()}
 		<br />
-		<Link href="/auth/password/forgot">
+		<Link legacyBehavior href="/auth/password/forgot">
 			<a className="text-white btn btn-outline-dark w-50 btn-sm">Forgot password</a>
 		</Link>
-		<Link href="/signup">
+		<Link legacyBehavior href="/signup">
 			<a style={{ textDecoration: "underline" }} className="text-white text-end">create new account!</a>
 		</Link>
 	</React.Fragment>;

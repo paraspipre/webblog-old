@@ -21,48 +21,44 @@ const Card = ({ blog }) => {
       ))
    }
    return (
-
-      <div style={{ backgroundImage: `url(${API}/blog/photo/${blog.slug})` }} class="blog-container container-fluid">
-         <div class="blog-header">
-            <div class="blog-cover">
-               <div class="blog-author">
-                  Written by <Link legacyBehavior href={`/profile/${blog.postedBy.username}`} ><a className="user-info" >{blog.postedBy.name}</a></Link>
+      <Link legacyBehavior href={`/blogs/${blog.slug}`}>
+         <div style={{ backgroundImage: `url(${API}/blog/photo/${blog.slug})` }} class="blog-container container-fluid">
+            <div class="blog-header">
+               <div class="blog-cover">
+                  <div class="blog-author">
+                     Written by <Link legacyBehavior href={`/profile/${blog.postedBy.username}`} ><a className="user-info" >{blog.postedBy.name}</a></Link>
+                  </div>
                </div>
             </div>
-         </div>
 
-         <div class="blog-body">
-            <div class="blog-title">
-               <Link legacyBehavior href={`/blogs/${blog.slug}`}>
-                  <a>
-                     <h3 className=" pb-3 font-weight-bold card-head">
-                        {blog.title}
-                     </h3>
-                  </a>
-               </Link>
+            <div class="blog-body">
+               <div class="blog-title">
+                  <Link legacyBehavior href={`/blogs/${blog.slug}`}>
+                     <a>
+                        <h3 className=" pb-3 font-weight-bold card-head">
+                           {blog.title}
+                        </h3>
+                     </a>
+                  </Link>
+               </div>
+               <div class="blog-summary">
+
+                  <p style={{ wordWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: blog.excerpt }}></p>
+               </div>
+               <div class="d-flex flex-wrap">
+                  {showBlogCategories(blog)}
+                  {showBlogTags(blog)}
+               </div>
             </div>
-            <div class="blog-summary">
 
-               <p style={{ wordWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: blog.excerpt }}></p>
+            <div class="blog-footer mt-3">
+               <ul>
+                  <li class="published-date">Published {moment(blog.createdAt).fromNow()}</li>
+               </ul>
             </div>
-            <Link legacyBehavior href={`/blogs/${blog.slug}`}>
-               <button id="btn-read" >
-                  Read more<i className="fa fa-arrow-right ms-1"  ></i>
-               </button>
-            </Link>
-            <div class="d-flex flex-wrap">
-               {showBlogCategories(blog)}
-               {showBlogTags(blog)}
-            </div>
-         </div>
 
-         <div class="blog-footer mt-3">
-            <ul>
-               <li class="published-date">Published {moment(blog.createdAt).fromNow()}</li>
-            </ul>
          </div>
-
-      </div>
+      </Link>
    )
 }
 

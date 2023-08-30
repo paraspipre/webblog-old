@@ -130,7 +130,7 @@ img {
   outline: none;
   border-radius: 50%;
   transition: all 0.5s ease-in-out;
-  background-color: silver;
+  background-color: #a076f9;
   color: silver;
 }
 
@@ -162,7 +162,7 @@ img {
   font-size: 13px;
 }
 
-.btn-search:focus ~ .input-search {
+.btn-search:hover ~ .input-search {
   width: 40vw;
   border-radius: 0px;
   background-color: transparent;
@@ -170,7 +170,7 @@ img {
   transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }
 
-.input-search:focus {
+.input-search:hover {
   width: 40vw;
   border-radius: 0px;
   background-color: transparent;
@@ -219,7 +219,7 @@ a:hover {
 
 .c {
   margin: 10px;
-  background-color: #d6c5f0;
+  background-color: #d7bbf5;
   border-radius: 10px;
   box-shadow: 0 0 8px rgb(255, 251, 251);
   max-height: 500px;
@@ -249,21 +249,21 @@ a:hover {
   padding: 2px 10px;
   color: #fff;
   cursor: pointer;
-  border: 1px solid black;
+  border: 1px solid #a076f9;
   margin-left: 4px;
 }
 
 .t-one:hover {
-  background-color: #000000;
+  background-color: #a076f9;
   color: white !important;
 }
 
 .tag-teal {
-  background-color: #000000;
+  background-color: #a076f9;
 }
 
 .tag-purple {
-  background-color: #5e76bf;
+  background-color: #a076f9;
 }
 
 .tag-pink {
@@ -287,7 +287,7 @@ a:hover {
 }
 
 .cat-all:hover {
-  background: black;
+  background: #a076f9;
   color: white;
 }
 
@@ -306,7 +306,7 @@ a:hover {
 }
 
 .card-link:hover {
-  color: black;
+  color: #a076f9;
 }
 
 /*   
@@ -516,7 +516,7 @@ a:hover {
 }
 
 .user-info:hover {
-  color: black;
+  color: #a076f9;
 }
 
 /* quill editor */
